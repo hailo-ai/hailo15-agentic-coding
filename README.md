@@ -39,6 +39,7 @@ prompt and runs the matching one; you can also call a skill explicitly with
 | Modify | `/get-model` | Propose and download a HEF from the public Hailo Model Zoo. |
 | Build | `/cross-compile` | Cross-compile an app for the H15 using the Yocto SDK. |
 | Deploy | `/deploy` | Push artifacts (binary, configs, HEFs) to the board and verify it runs. |
+| Run | `/run-app` | Run an app on the H15 and display it |
 | Debug | `/board-status` | Snapshot board health - temp, power, CPU/DRAM/NN-core/DSP utilization. Read-only. |
 | Maintenance | `/update-claude-beta` | Pull the latest beta skills, agents, and config from the agentic-coding repo into your checkout. |
 
