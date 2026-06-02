@@ -1,71 +1,103 @@
-# hailo15-agentic-coding
+# Claude × Hailo Media Library
 
-The Claude agentic layer for [`hailo-media-library`](https://github.com/hailo-ai/hailo-media-library).
+An agentic layer on top of `hailo-media-library`. It lets you explore docs, build and modify Media Library applications, and debug running deployments on the H15 board through Claude, without needing
+deep knowledge of the codebase.
 
-This repo holds the **most up-to-date skills and agents** plus all other Claude-related configuration.
-This is an AI-assisted layer that allows customers to explore, modify and build apps without requiring deep knowledge of the codebase:
+> **Updates.** This repo is updated with each Hailo SDK release. For more frequent, beta releases of the Claude-related skills, agents, and tooling, see the dedicated repo: <https://github.com/hailo-ai/hailo15-agentic-coding>. Run [`/update-claude-beta`](skills/update-claude-beta/) to pull those newer files into this checkout.
 
-- **Explore** Hailo's documentation at any stage
-- **Build & modify** Media Library applications
-- **Debug & evaluate** running deployments on the H15 board
-
-Just describe what you want in plain English. Claude scans the skills on every
-prompt and runs the matching one; you can also call a skill explicitly with
-`/skill-name`.
-
-```
-> explain this pipeline, add a FHD (1920×1080@30FPS) stream, swap detection to
-  YOLOv8n and deploy it to my connected h15l
-  → /explain-pipeline → /add-stream → /get-model → /swap-model → /cross-compile → /deploy
-```
-
-## What's in here
-
-| | |
-|---|---|
-| `skills/` | One-command tools that turn multi-page procedures into a single prompt - connect, explore, modify, build, deploy, debug. |
-| `agents/` | Scoped experts (`doc-explorer`, `pipeline-expert`, `apps-expert`) that skills call to return summarized context to the main session. |
-
-### Skills
-
-| Phase | Skill | What it does |
-|---|---|---|
-| Connection | `/connect` | Configure IP + SSH keys and connect to the H15. |
-| Explore | `/explain-pipeline` | Walk through what an app does - sources, AI stages, and the configs that feed it. |
-| Modify | `/add-stream` | Add another output stream (resolution, encoder, port). |
-| Modify | `/add-overlay` | Add, modify, or remove AI overlays (bboxes, masks, landmarks) - on-board burn-in or host-side. |
-| Modify | `/swap-model` | Replace the AI model in an app with a different HEF. |
-| Modify | `/edit-pipeline` | Modify the stage topology of an existing app. |
-| Modify | `/get-model` | Propose and download a HEF from the public Hailo Model Zoo. |
-| Build | `/cross-compile` | Cross-compile an app for the H15 using the Yocto SDK. |
-| Deploy | `/deploy` | Push artifacts (binary, configs, HEFs) to the board and verify it runs. |
-| Debug | `/board-status` | Snapshot board health - temp, power, CPU/DRAM/NN-core/DSP utilization. Read-only. |
-| Maintenance | `/update-claude-beta` | Pull the latest beta skills, agents, and config from the agentic-coding repo into your checkout. |
-
-### Agents
-
-| Agent | Role |
-|---|---|
-| `doc-explorer` | Reads the official Hailo PDF user guides and returns concise excerpts with page citations. |
-| `pipeline-expert` | Owns the Media Library pipeline architecture. |
-| `apps-expert` | Knows the reference apps and picks the closest one to copy/modify for a task. |
 
 ## Prerequisites
 
-- [Claude Code](https://claude.com/claude-code) installed and authenticated.
-- This repo's contents available under `.claude/` of your `hailo-media-library`
-  checkout. Run `claude` from the repo root - skills and agents load automatically.
+- Claude Code installed and authenticated.
+- This repo cloned locally. Run `claude` from the repo root. Skills and agents under `.claude/` load automatically.
 - An H15 SBC reachable over ethernet.
-- The Yocto SDK on the host (only for `/cross-compile` and `/deploy`).
+- The Yocto SDK installed on the host (only required for `/cross-compile`
+  and `/deploy`).
 
-## ⚠️ Disclaimer
+## How to use it
 
-This tool is built on top of **Claude**, an external Large Language Model
-provided by Anthropic. LLMs are **non-deterministic** - the same prompt can
-produce different output, and that output may be incomplete, inaccurate, or wrong.
+Just describe what you want in plain English. Claude scans the skills
+list on every prompt and invokes the matching one.
+You can also call a skill directly with `/skill-name` when you want to be explicit.
 
-It is **not intended for production use**. Always review what it
-proposes - generated code, configs, model choices, and commands run on your
-board/host - before relying on it. Hailo provides this tooling **as-is, with no
-warranty**, and takes **no responsibility** for any output, action, or outcome
-resulting from its use.
+Examples:
+
+```
+> what does the detection app do?
+  → runs /explain-pipeline
+
+> explain this pipeline, add a FHD(1920×1080@30FPS) stream, replace the detection network to be YOLOv8n and deploy it to my connected h15l
+  → runs /explain-pipeline, then /add-stream then /get-model and /swap-model, /cross-compile, /deploy
+
+> is the board overheating?
+  → runs /board-status
+```
+
+## Documentation
+
+The user guides shipped with this repo (under `docs/guides/`) are read
+on demand by the `doc-explorer` agent and cited with page numbers when
+referenced.
+
+---
+
+## Skills
+
+### Connection
+
+| Skill | What it does |
+|---|---|
+| [`/connect`](skills/connect/) | Configure IP + SSH keys and connect to the H15 over ethernet. Default `root@10.0.0.1`. |
+
+### Explore
+
+| Skill | What it does |
+|---|---|
+| [`/explain-pipeline`](skills/explain-pipeline/) | Walk through what an app does: sources, AI stages and the configuration files that feed it.|
+
+### Modification
+
+| Skill | What it does |
+|---|---|
+| [`/add-stream`](skills/add-stream/) | Add another output stream. Edits the application/profile JSON and pushes to the board. |
+| [`/add-overlay`](skills/add-overlay/) | Add, modify, or remove AI analytics overlays (bboxes, masks, landmarks). Burned into the stream on-board or drawn host-side. |
+| [`/swap-model`](skills/swap-model/) | Replace the AI model in an app with a different HEF (e.g. YOLOv8s → YOLOv8n).|
+| [`/edit-pipeline`](skills/edit-pipeline/) | Modify the pipeline of an existing app. |
+| [`/get-model`](skills/get-model/) | Propose and download a HEF from the public Hailo Model Zoo|
+
+### Build
+
+| Skill | What it does |
+|---|---|
+| [`/cross-compile`](skills/cross-compile/) | Cross-compile an app for the H15 using the Yocto SDK on the host.|
+
+### Deploy & run
+
+| Skill | What it does |
+|---|---|
+| [`/deploy`](skills/deploy/) | Push artifacts (binary, configs, HEFs) to the H15 and verify the app runs.|
+| [`/run-app`](skills/run-app/) | Run an app on the board and display it — launches it detached with a long `-t`, then points the host-side analytic viewer at each sink (one per UDP port).|
+
+### Debug
+
+| Skill | What it does |
+|---|---|
+| [`/board-status`](skills/board-status/) | Snapshot the board's runtime health — temperature, power, CPU load, DRAM use, NN core utilization. Read-only over SSH. |
+
+### Maintenance
+
+| Skill | What it does |
+|---|---|
+| [`/update-claude-beta`](skills/update-claude-beta/) | Pull newer beta versions of skills/agents/`CLAUDE.md` from <https://github.com/hailo-ai/hailo15-agentic-coding> if its `HEAD` is committed after this repo's. Overwrites matching files; never deletes local-only files; never auto-commits. |
+
+## Agents
+
+Agents are not invoked directly — skills call them when they need scoped
+expertise. Their full definitions are in [`agents/`](agents/).
+
+| Agent | Role |
+|---|---|
+| [`doc-explorer`](agents/doc-explorer.md) | Reads the official Hailo PDF user guides (media library, imaging, OS, model zoo, HailoRT, board quickstarts) and returns concise excerpts with page citations. Never invents content. |
+| [`pipeline-expert`](agents/pipeline-expert.md) | Owns the pipeline architecture — `generate_*_pipeline` patterns, stage types, frontend/encoder/UDP wiring, tiling+detection+aggregator structure, ZMQ metadata sender. Returns concrete `file:line` citations. |
+| [`apps-expert`](agents/apps-expert.md) | Knows the reference apps under `hailo-analytics/apps/` and picks the closest one to copy/modify for a given task. Returns the app path, the files that matter inside it, and what makes it the right (or wrong) base. |
+
