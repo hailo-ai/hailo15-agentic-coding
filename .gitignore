@@ -1,0 +1,2 @@
+# User guide PDFs are downloaded on demand (see CLAUDE.md), not shipped with the repo
+docs/guides/*.pdf

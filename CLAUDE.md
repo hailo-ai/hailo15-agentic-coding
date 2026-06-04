@@ -29,9 +29,10 @@ Use them so a skill can return summarized context to the main session without fl
 
 ## Documentation Reference
 
-User guides live at `docs/guides/`. They are NOT shipped with this repo -
-check if the needed PDF is already there (downloaded in a previous session);
-if not, download it from the URL below and place it under `docs/guides/`.
+User guides live at `docs/guides/`. They are NOT shipped with this repo.
+**At the start of every session** (on the first prompt, before anything else):
+check that all 4 PDFs below exist in `docs/guides/`; download any missing one
+from its URL (e.g. `curl -sfSL -o docs/guides/<name>.pdf <url>`). Do this in one command.
 
 | Workflow | Read | Download from |
 |---|---|---|
