@@ -24,7 +24,7 @@ Run an app on the H15 SBC and show its stream via the host **analytic viewer** (
 
 3. **Display it — analytic viewer.** Decide the setup path first:
    - **If you don't know whether the viewer is already set up on this host, ask the user: "Is this your first time using the analytic viewer?"**
-   - **First time → install it.** Follow the media library user guide **§11.1.3** (`docs/guides/hailo_media_library_1.11.0_user_guide.pdf`, read via `doc-explorer`). In short: install the system packages PyGObject + cairo (Debian/Ubuntu: `sudo apt install python3-gi python3-gi-cairo gir1.2-gtk-3.0`), then the Python deps from `tools/analytic_viewer/requirements.txt`. **Ask whether to install those into a virtualenv (recommended) or user site-packages:**
+   - **First time → install it.** Follow the media library user guide **§10.1.3** (`docs/guides/hailo_media_library_1.12.0_user_guide.pdf`, read via `doc-explorer`). In short: install the system packages PyGObject + cairo (Debian/Ubuntu: `sudo apt install python3-gi python3-gi-cairo gir1.2-gtk-3.0`), then the Python deps from `tools/analytic_viewer/requirements.txt`. **Ask whether to install those into a virtualenv (recommended) or user site-packages:**
      - **venv (recommended):** `python3 -m venv tools/analytic_viewer/.venv && tools/analytic_viewer/.venv/bin/pip install -r tools/analytic_viewer/requirements.txt` — then launch the viewer with `tools/analytic_viewer/.venv/bin/python3`.
      - **user site-packages:** `python3 -m pip install --user -r tools/analytic_viewer/requirements.txt`
    - **Not first time, and you know the venv** → just activate it and run (`tools/analytic_viewer/.venv/bin/python3`, or `source .../.venv/bin/activate`).

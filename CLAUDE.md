@@ -29,13 +29,15 @@ Use them so a skill can return summarized context to the main session without fl
 
 ## Documentation Reference
 
-User guides shipped with this repo, at `docs/guides/`:
+User guides live at `docs/guides/`. They are NOT shipped with this repo -
+check if the needed PDF is already there (downloaded in a previous session);
+if not, download it from the URL below and place it under `docs/guides/`.
 
-| Workflow | Read |
-|---|---|
-| **Media library / demo building** | `docs/guides/hailo_media_library_1.11.0_user_guide.pdf` |
-| **ISP / imaging bugs** | `docs/guides/hailo_imaging_1.11.0_user_guide.pdf` |
-| **OS / boot / system config** | `docs/guides/hailo_os_user_guide_1.11.0.pdf` |
-| **Board setup / quickstart** | `docs/guides/hailo15l_sbc_2.x_quick_start_guide_1.2.pdf` |
+| Workflow | Read | Download from |
+|---|---|---|
+| **Media library / demo building** | `docs/guides/hailo_media_library_1.12.0_user_guide.pdf` | https://hailo-csdata.s3.eu-west-2.amazonaws.com/resources/documentation/documentation/hailo_media_library_1.12.0_user_guide.pdf |
+| **ISP / imaging bugs** | `docs/guides/hailo_imaging_1.12.0_user_guide.pdf` | https://hailo-csdata.s3.eu-west-2.amazonaws.com/resources/documentation/documentation/hailo_imaging_1.12.0_user_guide.pdf |
+| **OS / boot / system config** | `docs/guides/hailo_os_guide_1.12.0.pdf` | https://hailo-csdata.s3.eu-west-2.amazonaws.com/resources/documentation/documentation/hailo_os_guide_1.12.0.pdf |
+| **Board setup / quickstart** | `docs/guides/hailo15l_sbc_2.x_quick_start_guide_1.3.pdf` | https://hailo-csdata.s3.eu-west-2.amazonaws.com/resources/documentation/documentation/hailo15l_sbc_2.x_quick_start_guide_1.3.pdf |
 
 When a session involves one of these workflows, use 'doc-explorer' to read the relevant PDF at the start.

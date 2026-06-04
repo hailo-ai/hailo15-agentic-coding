@@ -8,7 +8,7 @@ tools: Bash, Read, Agent
 
 Give the user one snapshot: thermals, power, CPU, memory, NN core utilization, running app PID. All canonical Hailo commands — nothing invented.
 
-Authoritative reference: **Hailo OS User Guide v1.11.0** — `docs/guides/hailo_os_user_guide_1.11.0.pdf`. Relevant sections: §3.3 ("Temperature Monitoring"), §6.1 ("Hailo-15 Profiler"), §6.2 ("NoC Profiler"), §6.3 ("CMA Heap info").
+Authoritative reference: **Hailo OS User Guide v1.12.0** — `docs/guides/hailo_os_guide_1.12.0.pdf`. Relevant sections: §3.3 ("Temperature Monitoring"), §6.1 ("Hailo-15 Profiler"), §6.2 ("NoC Profiler"), §6.3 ("CMA Heap info").
 
 ### `hailortcli` cheat sheet (relevant subcommands)
 

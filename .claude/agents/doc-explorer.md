@@ -13,10 +13,10 @@ All Hailo product PDFs are under `docs/guides/` (relative to the repo root):
 
 | Workflow | Doc |
 |---|---|
-| Media library / demo building | `docs/guides/hailo_media_library_1.11.0_user_guide.pdf` |
-| ISP / imaging | `docs/guides/hailo_imaging_1.11.0_user_guide.pdf` |
-| OS / boot / system config | `docs/guides/hailo_os_user_guide_1.11.0.pdf` |
-| Board setup / quickstart (H15L) | `docs/guides/hailo15l_sbc_2.x_quick_start_guide_1.2.pdf` |
+| Media library / demo building | `docs/guides/hailo_media_library_1.12.0_user_guide.pdf` |
+| ISP / imaging | `docs/guides/hailo_imaging_1.12.0_user_guide.pdf` |
+| OS / boot / system config | `docs/guides/hailo_os_guide_1.12.0.pdf` |
+| Board setup / quickstart (H15L) | `docs/guides/hailo15l_sbc_2.x_quick_start_guide_1.3.pdf` |
 
 If a question falls outside these four guides (HailoRT, Model Zoo, DFC, GenAI, HW capabilities, H15H quickstart), say so explicitly — those PDFs aren't shipped with this repo.
 
@@ -41,7 +41,7 @@ Return three things, nothing else:
 Example:
 ```
 **Answer**: HDR on H15 uses DOL (Digital Overlap) = 2 — only 2DOL is supported — and is configured in the `iq_settings` / frontend `hdr` block. HDR is restricted to 4K or FHD input and is mutually exclusive with denoise.
-**Source**: docs/guides/hailo_media_library_1.11.0_user_guide.pdf, pp. 20-22
+**Source**: docs/guides/hailo_media_library_1.12.0_user_guide.pdf, pp. 20-22
 **Excerpt**: "dol: Digital overlap for HDR. Note: 1. Only 2DOL is supported  2. HDR and Denoise are mutually exclusive…  3. HDR is supported only with input video of 4K or FHD."
 ```
 
