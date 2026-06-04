@@ -98,10 +98,11 @@ To switch to board-side burn-in:
 
 6. **Verify with `analytic_viewer` (no ZMQ subscription).** The overlay is already in the bitstream, so launch the viewer with only the UDP port — omit `--analytic-data-port` so it does no host-side drawing on top:
    ```bash
-   source /home/oreny/hailo/venvs/analytic_viewer/bin/activate
-   cd /home/oreny/hailo/vpu/repos/hailo-media-library/tools/analytic_viewer
+   source tools/analytic_viewer/.venv/bin/activate
+   cd tools/analytic_viewer
    python app_analytic_draw_client.py --udp-port <udp_port>
    ```
+   If `tools/analytic_viewer/.venv` doesn't exist and you don't know the user's venv, ask — and offer to create it (`python3 -m venv tools/analytic_viewer/.venv && tools/analytic_viewer/.venv/bin/pip install -r tools/analytic_viewer/requirements.txt`).
    Confirm the overlays are visible. Because nothing is being drawn host-side, anything you see is what every other UDP receiver gets too.
 
 ### overlay_config_t fields you can override
@@ -176,11 +177,12 @@ The encoded stream is unchanged — anyone *else* receiving the same UDP port se
 
 3. **Run the viewer:**
    ```bash
-   source /home/oreny/hailo/venvs/analytic_viewer/bin/activate
-   cd /home/oreny/hailo/vpu/repos/hailo-media-library/tools/analytic_viewer
+   source tools/analytic_viewer/.venv/bin/activate
+   cd tools/analytic_viewer
    python app_analytic_draw_client.py --port <udp_port> \
        --analytic-data-ip <board_ip> --analytic-data-port 7000
    ```
+   If `tools/analytic_viewer/.venv` doesn't exist and you don't know the user's venv, ask — and offer to create it (`python3 -m venv tools/analytic_viewer/.venv && tools/analytic_viewer/.venv/bin/pip install -r tools/analytic_viewer/requirements.txt`).
 
 4. **Start the board app** (after the viewer is listening — UDP is fire-and-forget).
 
